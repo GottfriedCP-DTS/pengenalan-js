@@ -33,10 +33,14 @@
             var n = document.getElementById('in').value
             var par = document.getElementById('out')
             if (n <= 10 && n >= 1) {
-                par.innerHTML = "nilai yang Anda masukkan valid"
+                for (var i = 0; i < 5; i++) {
+                    par.innerHTML = par.innerHTML + "nilai yang Anda masukkan valid <br>"
+                }
             }
             else {
-                par.innerHTML = "nilai yang Anda masukkan tidak valid"
+                for (var i = 0; i < 5; i++) {
+                    par.innerHTML = par.innerHTML + "nilai yang Anda masukkan tidak valid <br>"
+                }
             }
         }
         var a = 1;
