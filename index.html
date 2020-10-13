@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="out">
+
+    </div>
+
+    <script>
+        var n = 81 // input
+        var ans = '' // simpan jawaban sebagai string
+        for (var i=1; i<=n; i++) {
+            if (n % i == 0) {
+                ans = ans + i.toString() + " "
+            }
+        }
+        console.log(ans) // tampilkan hasilnya ke console
+        document.getElementById('out').innerHTML = 'Faktor dari ' + n + " adalah " + ans // tampilkan hasilnya di laman
+    </script>
+</body>
+</html>

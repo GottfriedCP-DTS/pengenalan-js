@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Tugas 3 (+Bonus)</title>
+</head>
+
+<body>
+    <div class="container m-3">
+        <form>
+            <div class="form-group">
+                <input id="jumlahInput" type="number" class="form-control" placeholder="Input banyaknya nilai siswa">
+            </div>
+            <button type="button" onclick="generateFields()" class="btn btn-primary">Generate</button>
+        </form>
+
+        <div id="stats" class="container my-3"></div>
+
+        <div id="input-form" class="container"></div>
+    </div>
+
+    <script>
+        const generateFields = () => {
+            numberOfFields = document.getElementById('jumlahInput').value
+            console.log(numberOfFields)
+
+            var generatedFields = ''
+
+            for (var i = 0; i < numberOfFields; i++) {
+                var labelNama = 'Nama Siswa: '
+                var inputNama = '<input type="text" name="nama" class="form-control"><br>'
+                var labelUsia = 'Usia Siswa (tahun): '
+                var inputUsia = '<input type="number" name="usia" class="form-control" min=0><br>'
+                var labelNilai = 'Nilai Siswa: '
+                var inputNilai = '<input type="number" name="score" class="form-control" min=0 max=100><br><br>'
+
+                generatedFields = generatedFields + labelNama + inputNama + labelUsia + inputUsia + labelNilai + inputNilai
+            }
+
+            generatedFields = generatedFields + '<button type="button" class="btn btn-primary" onclick="calculateScore()">Hitung nilai</button>'
+
+            document.getElementById('input-form').innerHTML = generatedFields
+        }
+
+        const calculateScore = () => {
+            var scores = []
+            var ages = []
+            var names = []
+            var mutus = []
+            var namaInput = document.getElementsByName('nama')
+            var usiaInput = document.getElementsByName('usia')
+            var scoreInput = document.getElementsByName('score')
+            for (var i = 0; i<scoreInput.length; i++) {
+                // tambah skor ke dalam array
+                names.push(namaInput[i].value)
+                ages.push(usiaInput[i].value)
+                scores.push(scoreInput[i].value/1)
+                mutus.push(hitungMutu(scoreInput[i].value))
+            }
+            var max = 0
+            var maxIndex = 0
+            var total = 0
+            var avg = 0
+            console.log(scores)
+            // hitung statistik menggunakan array scores
+            for (var i = 0; i<scores.length; i++) {
+                if (max<scores[i]) {
+                    max = scores[i]
+                    maxIndex = i
+                }
+                total += scores[i]/1
+            }
+            avg = total / scores.length
+            console.log('Total: ' + total)
+            console.log('Max: ' + max)
+            console.log('Average: ' + avg)
+            document.getElementById('stats').innerHTML = 'Rata-rata = ' + avg + ' Maks = ' + max + ' (Nilai Terbaik: ' + names[maxIndex] + ' usia: '+ ages[maxIndex] + ' mutu: ' + mutus[maxIndex] + ' )<br> Daftar Nilai Mutu: ' + mutus
+        }
+
+        const hitungMutu = (nilai) => {
+            if (nilai >= 85) {
+                return 'A'
+            } else if (nilai >= 75) {
+                return 'B'
+            } else if (nilai >= 60) {
+                return 'C'
+            } else {
+                return 'D'
+            }
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

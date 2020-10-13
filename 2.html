@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Tugas 3</title>
+</head>
+
+<body>
+    <div class="container m-3">
+        <form>
+            <div class="form-group">
+                <input id="jumlahInput" type="number" class="form-control" placeholder="Input banyaknya nilai siswa">
+            </div>
+            <button type="button" onclick="generateFields()" class="btn btn-primary">Generate</button>
+        </form>
+
+        <div id="stats" class="container my-3"></div>
+
+        <div id="input-form" class="container"></div>
+    </div>
+
+    <script>
+        const generateFields = () => {
+            numberOfFields = document.getElementById('jumlahInput').value
+            console.log(numberOfFields)
+
+            generatedFields = ''
+
+            for (var i = 0; i < numberOfFields; i++) {
+                generatedFields = generatedFields + 'Masukkan nilai ke-' + (i+1) + ' <input type=number id="val'+ i +'" name="score" min=0 max=100><br><br>'
+            }
+
+            generatedFields = generatedFields + '<button type="button" class="btn btn-primary" onclick="calculateScore()">Hitung nilai</button>'
+
+            document.getElementById('input-form').innerHTML = generatedFields
+        }
+
+        const calculateScore = () => {
+            scores = []
+            scoreInput = document.getElementsByName('score')
+            for (var i = 0; i<scoreInput.length; i++) {
+                // tambah skor ke dalam array
+                console.log(scoreInput[i].value)
+                scores.push(scoreInput[i].value/1)
+            }
+            var max = 0
+            var total = 0
+            var avg = 0
+            // hitung statistik menggunakan array scores
+            for (var i = 0; i<scores.length; i++) {
+                if (max<scores[i]) { max = scores[i] }
+                total += scores[i]/1
+            }
+            avg = total / scores.length
+            console.log('Total: ' + total)
+            console.log('Max: ' + max)
+            console.log('Average: ' + avg)
+            document.getElementById('stats').innerHTML = 'Rata-rata = ' + avg + ' Maks = ' + max
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
