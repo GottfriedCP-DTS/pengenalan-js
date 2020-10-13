@@ -66,7 +66,9 @@
                 mutus.push(hitungMutu(scoreInput[i].value))
             }
             var max = 0
+            var min = 999
             var maxIndex = 0
+            var minIndex = 0
             var total = 0
             var avg = 0
             console.log(scores)
@@ -76,13 +78,17 @@
                     max = scores[i]
                     maxIndex = i
                 }
+                if (min>scores[i]) {
+                    min = scores[i]
+                    minIndex = i
+                }
                 total += scores[i]/1
             }
             avg = total / scores.length
             console.log('Total: ' + total)
             console.log('Max: ' + max)
             console.log('Average: ' + avg)
-            document.getElementById('stats').innerHTML = 'Rata-rata = ' + avg + ' Maks = ' + max + ' (Nilai Terbaik: ' + names[maxIndex] + ' usia: '+ ages[maxIndex] + ' mutu: ' + mutus[maxIndex] + ' )<br> Daftar Nilai Mutu: ' + mutus
+            document.getElementById('stats').innerHTML = 'Rata-rata = ' + avg + ' Min: ' + min + ' Maks = ' + max + ' (Nilai Terbaik: ' + names[maxIndex] + ' usia: '+ ages[maxIndex] + ' mutu: ' + mutus[maxIndex] + ' )<br> Daftar Nilai Mutu: ' + mutus
         }
 
         const hitungMutu = (nilai) => {
